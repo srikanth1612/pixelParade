@@ -1,0 +1,86 @@
+PODS:
+  - Alamofire (5.10.1)
+  - DownloadButton (0.1.0)
+  - FLAnimatedImage (1.0.17)
+  - Flutter (1.0.0)
+  - in_app_purchase_storekit (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - R.swift (7.7.0)
+  - SDWebImage (4.4.8):
+    - SDWebImage/Core (= 4.4.8)
+  - SDWebImage/Core (4.4.8)
+  - SDWebImage/GIF (4.4.8):
+    - FLAnimatedImage (~> 1.0)
+    - SDWebImage/Core
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - SnapKit (5.7.1)
+  - sqflite_darwin (0.0.4):
+    - Flutter
+    - FlutterMacOS
+  - Sync (6.5.0)
+
+DEPENDENCIES:
+  - DownloadButton
+  - Flutter (from `Flutter`)
+  - in_app_purchase_storekit (from `.symlinks/plugins/in_app_purchase_storekit/darwin`)
+  - Moya
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - R.swift
+  - SDWebImage
+  - SDWebImage/GIF
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - SnapKit
+  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
+  - Sync
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - DownloadButton
+    - FLAnimatedImage
+    - Moya
+    - R.swift
+    - SDWebImage
+    - SnapKit
+    - Sync
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  in_app_purchase_storekit:
+    :path: ".symlinks/plugins/in_app_purchase_storekit/darwin"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  sqflite_darwin:
+    :path: ".symlinks/plugins/sqflite_darwin/darwin"
+
+SPEC CHECKSUMS:
+  Alamofire: 840d2a1ad82355b536ec6ba5f97e5bfa54600ca3
+  DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
+  FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  in_app_purchase_storekit: 8c3b0b3eb1b0f04efbff401c3de6266d4258d433
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  R.swift: 33e7082885d0c0bac7ae20ef7d2845a6a920ca11
+  SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
+  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  sqflite_darwin: a553b1fd6fe66f53bbb0fe5b4f5bab93f08d7a13
+  Sync: 86bb8aa0ea2f955ea5ac97b7b73129f86591c39e
+
+PODFILE CHECKSUM: bff0f9f670685ae27cf1edf0e2abe968e81d49ac
+
+COCOAPODS: 1.14.3

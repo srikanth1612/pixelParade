@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerViewInMsg" id="Y7F-Bo-grp" customClass="StickerViewInMsg" customModule="pixelparadeiMessage" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="239" height="215"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="239" height="215"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sticker_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="K1p-Jn-i62">
+                        <rect key="frame" x="2" y="2" width="235" height="211"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfU-Bz-h2t" userLabel="msStickerView" customClass="MSStickerView">
+                        <rect key="frame" x="2" y="2" width="235" height="211"/>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="K1p-Jn-i62" firstAttribute="top" secondItem="Y7F-Bo-grp" secondAttribute="top" constant="2" id="7aH-Ez-jsS"/>
+                <constraint firstAttribute="trailing" secondItem="sfU-Bz-h2t" secondAttribute="trailing" constant="2" id="8h3-O2-iWt"/>
+                <constraint firstAttribute="bottom" secondItem="sfU-Bz-h2t" secondAttribute="bottom" constant="2" id="9dK-92-OFf"/>
+                <constraint firstItem="sfU-Bz-h2t" firstAttribute="top" secondItem="Y7F-Bo-grp" secondAttribute="top" constant="2" id="HPV-zL-WtT"/>
+                <constraint firstAttribute="bottom" secondItem="K1p-Jn-i62" secondAttribute="bottom" constant="2" id="VXS-UG-un9"/>
+                <constraint firstItem="sfU-Bz-h2t" firstAttribute="leading" secondItem="Y7F-Bo-grp" secondAttribute="leading" constant="2" id="faa-TE-25M"/>
+                <constraint firstAttribute="trailing" secondItem="K1p-Jn-i62" secondAttribute="trailing" constant="2" id="i2U-Q0-Kgi"/>
+                <constraint firstItem="K1p-Jn-i62" firstAttribute="leading" secondItem="Y7F-Bo-grp" secondAttribute="leading" constant="2" id="uoU-4w-yuo"/>
+            </constraints>
+            <size key="customSize" width="239" height="215"/>
+            <connections>
+                <outlet property="msStickerView" destination="sfU-Bz-h2t" id="gyN-Ku-Q16"/>
+                <outlet property="placeholder" destination="K1p-Jn-i62" id="yvF-sW-fnF"/>
+            </connections>
+            <point key="canvasLocation" x="-80.5" y="25.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="sticker_placeholder" width="96" height="96"/>
+    </resources>
+</document>

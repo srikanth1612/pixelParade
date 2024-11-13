@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Jcx-HY-Obx" customClass="ShopHeader" customModule="Pixel_Parade" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="363" height="49"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main-logo" translatesAutoresizingMaskIntoConstraints="NO" id="5BV-U7-MMc">
+                    <rect key="frame" x="0.0" y="5" width="38" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="YvZ-KS-zW7"/>
+                        <constraint firstAttribute="width" constant="38" id="sfG-Dy-2pe"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pixel Parade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4h-d3-Ile">
+                    <rect key="frame" x="46" y="9.5" width="143.5" height="29"/>
+                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                    <color key="textColor" red="0.0" green="0.82745098039999998" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gjz-16-uJS">
+                    <rect key="frame" x="276.5" y="7.5" width="36.5" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Gjz-16-uJS" secondAttribute="height" multiplier="16:15" id="FKc-Fr-qYZ"/>
+                    </constraints>
+                    <connections>
+                        <action selector="cameraButtonTapped:" destination="Jcx-HY-Obx" eventType="touchUpInside" id="j01-Sd-PAb"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wi7-yM-Fym">
+                    <rect key="frame" x="318" y="7.5" width="34" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Wi7-yM-Fym" secondAttribute="height" multiplier="1:1" id="fS7-Eb-VBy"/>
+                    </constraints>
+                    <state key="normal" image="search_icon"/>
+                    <connections>
+                        <action selector="searchDidPressed:" destination="Jcx-HY-Obx" eventType="touchUpInside" id="MZ4-8L-SYw"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="5BV-U7-MMc" firstAttribute="top" secondItem="Jcx-HY-Obx" secondAttribute="top" constant="5" id="5j2-rR-1vI"/>
+                <constraint firstItem="Wi7-yM-Fym" firstAttribute="height" secondItem="Gjz-16-uJS" secondAttribute="height" id="8n9-Gc-qus"/>
+                <constraint firstItem="Gjz-16-uJS" firstAttribute="centerY" secondItem="Jcx-HY-Obx" secondAttribute="centerY" id="Gmm-ey-mmR"/>
+                <constraint firstItem="5BV-U7-MMc" firstAttribute="leading" secondItem="Jcx-HY-Obx" secondAttribute="leading" id="IIv-tf-PkX"/>
+                <constraint firstItem="Gjz-16-uJS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d4h-d3-Ile" secondAttribute="trailing" constant="5" id="KTL-MU-DPZ"/>
+                <constraint firstAttribute="trailing" secondItem="Wi7-yM-Fym" secondAttribute="trailing" constant="11" id="PeN-xm-CuA"/>
+                <constraint firstItem="d4h-d3-Ile" firstAttribute="centerY" secondItem="5BV-U7-MMc" secondAttribute="centerY" id="eBj-IC-McK"/>
+                <constraint firstItem="Wi7-yM-Fym" firstAttribute="centerY" secondItem="Jcx-HY-Obx" secondAttribute="centerY" id="h7E-GT-CaG"/>
+                <constraint firstItem="d4h-d3-Ile" firstAttribute="leading" secondItem="5BV-U7-MMc" secondAttribute="trailing" constant="8" id="piG-zj-1kq"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5BV-U7-MMc" secondAttribute="bottom" priority="250" id="qON-qN-cxs"/>
+                <constraint firstItem="Wi7-yM-Fym" firstAttribute="leading" secondItem="Gjz-16-uJS" secondAttribute="trailing" constant="5" id="xxD-C3-aUM"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cameraButton" destination="Gjz-16-uJS" id="d2s-cB-BWk"/>
+            </connections>
+            <point key="canvasLocation" x="-128.80000000000001" y="-332.38380809595208"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="main-logo" width="38" height="38"/>
+        <image name="search_icon" width="22" height="22"/>
+    </resources>
+</document>

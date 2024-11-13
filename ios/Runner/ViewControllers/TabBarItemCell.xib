@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TabBarItemCell" id="zut-yD-vtu" customClass="TabBarItemCell" customModule="PixelParade" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijD-s1-nKf" userLabel="selectionTopLayerView">
+                        <rect key="frame" x="0.0" y="0.0" width="49" height="5"/>
+                        <color key="backgroundColor" red="0.0" green="0.82745098039999998" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="5" id="P3O-bw-BzW"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fFc-Cu-hvH" userLabel="selectionBottomLayerView">
+                        <rect key="frame" x="0.0" y="5" width="49" height="44"/>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shop-image" translatesAutoresizingMaskIntoConstraints="NO" id="rOk-6S-7C8">
+                        <rect key="frame" x="7" y="7" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="cM0-mc-Xbm"/>
+                            <constraint firstAttribute="height" constant="35" id="n4m-Wn-Ggk"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="rOk-6S-7C8" firstAttribute="centerX" secondItem="zut-yD-vtu" secondAttribute="centerX" id="1aT-cf-j2Y"/>
+                <constraint firstItem="rOk-6S-7C8" firstAttribute="centerY" secondItem="zut-yD-vtu" secondAttribute="centerY" id="5FA-ra-ZmG"/>
+                <constraint firstItem="fFc-Cu-hvH" firstAttribute="top" secondItem="ijD-s1-nKf" secondAttribute="bottom" id="Hgv-kc-MD7"/>
+                <constraint firstItem="ijD-s1-nKf" firstAttribute="leading" secondItem="zut-yD-vtu" secondAttribute="leading" id="IO6-3k-7r5"/>
+                <constraint firstAttribute="trailing" secondItem="ijD-s1-nKf" secondAttribute="trailing" id="Oxh-Xb-9pF"/>
+                <constraint firstAttribute="bottom" secondItem="fFc-Cu-hvH" secondAttribute="bottom" id="cK2-V9-02n"/>
+                <constraint firstItem="fFc-Cu-hvH" firstAttribute="leading" secondItem="zut-yD-vtu" secondAttribute="leading" id="ggP-fB-eP2"/>
+                <constraint firstAttribute="trailing" secondItem="fFc-Cu-hvH" secondAttribute="trailing" id="iIx-ME-ISE"/>
+                <constraint firstItem="ijD-s1-nKf" firstAttribute="top" secondItem="zut-yD-vtu" secondAttribute="top" id="kyf-jR-Dqa"/>
+            </constraints>
+            <size key="customSize" width="233" height="207"/>
+            <connections>
+                <outlet property="imageView" destination="rOk-6S-7C8" id="haC-rR-cy0"/>
+                <outlet property="selectionBottomLayerView" destination="fFc-Cu-hvH" id="zRw-Od-TxL"/>
+                <outlet property="selectionTopLayerView" destination="ijD-s1-nKf" id="H32-w0-7VT"/>
+            </connections>
+            <point key="canvasLocation" x="39.5" y="24.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="shop-image" width="26" height="29"/>
+    </resources>
+</document>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerPackHeader" id="7fh-W0-Itd" customClass="StickerPackHeader" customModule="PixelParade" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main-logo" translatesAutoresizingMaskIntoConstraints="NO" id="KRk-vr-kIx">
+                    <rect key="frame" x="8" y="5" width="38" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="38" id="Cal-wI-Ajn"/>
+                        <constraint firstAttribute="height" constant="38" id="aUJ-Dh-hcm"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brooklyn" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4j1-B4-Y07">
+                    <rect key="frame" x="54" y="10" width="313" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                    <color key="textColor" red="0.0" green="0.82745098039999998" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="#gif #new_york #18+ #proud" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3lj-ui-5QL">
+                    <rect key="frame" x="54" y="33" width="313" height="33"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                </textView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="4j1-B4-Y07" secondAttribute="trailing" constant="8" id="Lzp-hD-Wvq"/>
+                <constraint firstItem="4j1-B4-Y07" firstAttribute="top" secondItem="7fh-W0-Itd" secondAttribute="top" constant="10" id="Q8V-ne-4Ok"/>
+                <constraint firstAttribute="trailing" secondItem="3lj-ui-5QL" secondAttribute="trailing" constant="8" id="RqE-t9-pAq"/>
+                <constraint firstItem="3lj-ui-5QL" firstAttribute="leading" secondItem="KRk-vr-kIx" secondAttribute="trailing" constant="8" id="TgK-Pu-gSh"/>
+                <constraint firstItem="KRk-vr-kIx" firstAttribute="leading" secondItem="7fh-W0-Itd" secondAttribute="leading" constant="8" id="ZDN-mO-pzl"/>
+                <constraint firstItem="KRk-vr-kIx" firstAttribute="top" secondItem="7fh-W0-Itd" secondAttribute="top" constant="5" id="bJg-Yj-l4r"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3lj-ui-5QL" secondAttribute="bottom" priority="250" constant="7" id="g2s-Mp-Ahz"/>
+                <constraint firstItem="3lj-ui-5QL" firstAttribute="top" secondItem="4j1-B4-Y07" secondAttribute="bottom" constant="1" id="oKJ-Io-pQi"/>
+                <constraint firstItem="4j1-B4-Y07" firstAttribute="leading" secondItem="KRk-vr-kIx" secondAttribute="trailing" constant="8" id="zlQ-hb-bNP"/>
+            </constraints>
+            <connections>
+                <outlet property="descriptionTextView" destination="3lj-ui-5QL" id="3u5-Dr-QaP"/>
+                <outlet property="imageView" destination="KRk-vr-kIx" id="bFf-wn-meK"/>
+                <outlet property="titleLabel" destination="4j1-B4-Y07" id="Nhm-FM-eCB"/>
+            </connections>
+            <point key="canvasLocation" x="77.5" y="61.5"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="main-logo" width="38" height="38"/>
+    </resources>
+</document>
