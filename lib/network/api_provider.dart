@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:pixel_parade/models/banner_model.dart';
 import 'package:pixel_parade/models/purchased_stickers.dart';
 import 'package:pixel_parade/models/stickers_model.dart';
@@ -151,7 +152,8 @@ class ApiProvider {
     }
   }
 
-  Future<List<PurchasedStickers>?> getPurchasedStickers(String id) async {
+  Future<List<Sticker>?> getPurchasedStickers(String id,
+      {bool requiredStorage = true}) async {
     try {
       Options headerOptions = await getHeaderOptions();
       Response response = await _dio.get(
@@ -159,11 +161,24 @@ class ApiProvider {
         options: headerOptions,
       );
       if (response.statusCode == 200) {
-        await sharedStorageService.saveDataToCoreData(
-            id, jsonEncode(response.data));
-        return purchasedStickersFromJson(response.data);
+        if (requiredStorage) {
+          await sharedStorageService.saveDataToCoreData(
+              id, jsonEncode(response.data));
+          await Hive.openBox('stickersBox');
+          final Box stickerBox = Hive.box('stickersBox');
+
+          List<Sticker> data =
+              purchasedStickersFromJson(jsonEncode(response.data));
+
+          stickerBox.put(id, data);
+          stickerBox.close();
+        }
+
+        List<Sticker> data =
+            purchasedStickersFromJson(jsonEncode(response.data));
+
+        return data;
       } else {
-        debugPrint(response.data.toString());
         return null;
       }
     } catch (error) {

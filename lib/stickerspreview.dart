@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hive/hive.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:pixel_parade/features/purchases/purchaseHelper.dart';
 import 'package:pixel_parade/models/stickers_model.dart';
@@ -25,16 +26,75 @@ class StickerPreview extends StatefulWidget {
 class _StickerPreviewState extends State<StickerPreview> {
   late final StreamSubscription<List<PurchaseDetails>> _purchasesSubscription;
 
+  bool isPurchased = false;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _purchasesSubscription = InAppPurchase.instance.purchaseStream.listen(
-      BillingService.instance.handlePurchaseUpdates,
-      onError: (error) {
-        // handle error
-      },
-    );
+    _purchasesSubscription = InAppPurchase.instance.purchaseStream
+        .listen(handlePurchaseUpdates, onError: (error) {
+      print("error");
+      // handle error
+    }, onDone: () {
+      _purchasesSubscription.cancel();
+      checkingExistingStickers();
+    });
+    checkingExistingStickers();
+  }
+
+  Future<void> handlePurchaseUpdates(
+    List<PurchaseDetails> purchaseDetailsList,
+  ) async {
+    for (final purchaseDetails in purchaseDetailsList) {
+      switch (purchaseDetails.status) {
+        case PurchaseStatus.pending:
+          // handle pending case and update the UI
+          continue;
+        case PurchaseStatus.error:
+          // handle error case and update the UI
+          break;
+        case PurchaseStatus.canceled:
+          // handle canceled case and update the UI
+          break;
+        case PurchaseStatus.purchased:
+          RegExp regExp = RegExp(r'\d+');
+
+          Iterable<Match> matches =
+              regExp.allMatches(purchaseDetails.productID);
+
+          List<String> numbers =
+              matches.map((match) => match.group(0)!).toList();
+
+          ApiProvider.apiProvider.savePurchaseData(
+              purchaseDetails.verificationData.localVerificationData,
+              numbers.first);
+          Future.delayed(const Duration(seconds: 3), () {
+            checkingExistingStickers();
+          });
+
+          break;
+
+        case PurchaseStatus.restored:
+          print(purchaseDetails);
+          break;
+      }
+      if (purchaseDetails.pendingCompletePurchase) {
+        await BillingService.instance.iap.completePurchase(purchaseDetails);
+      }
+    }
+  }
+
+  checkingExistingStickers() async {
+    var posts = await ApiProvider.apiProvider.getPurchasedStickers(
+        widget.selectedSticker!.id.toString(),
+        requiredStorage: false);
+
+    if (posts != null) {
+      widget.selectedSticker!.stickers = posts;
+      isPurchased = true;
+      setState(() {});
+    }
   }
 
   final sharedStorageService = SharedStorageService();
@@ -132,69 +192,60 @@ class _StickerPreviewState extends State<StickerPreview> {
                             );
                           },
                         ))),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 60,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: HexColor("#006FFD"),
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
-                      onPressed: () async {
-                        // print("object");
-
-                        // await sharedStorageService.saveDataToCoreData(
-                        //     "key", "Srikanth");
-
-                        // print("success");
-
-                        // var data = await sharedStorageService
-                        //     .retrieveDataFromCoreData("key");
-
-                        // print(data);
-
-                        if (await SessionManager.getUserEmail() == "") {
-                          if (mounted) {
-                            showAlertWithDialouge(context, "", (message) {
-                              Navigator.pop(context);
-                              ApiProvider.apiProvider
-                                  .saveUserEmail(message)
-                                  .then((value) {
-                                if (value ?? false) {
-                                  BillingService.instance.fetchProducts(
-                                      context, [
-                                    "io.GoodIdeas.Pixel_Parade.stickerpacks_${widget.selectedSticker?.id ?? ""}"
-                                  ]);
-                                }
+                if (!isPurchased)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 60,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: HexColor("#006FFD"),
+                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
+                        onPressed: () async {
+                          if (await SessionManager.getUserEmail() == "") {
+                            if (mounted) {
+                              showAlertWithDialouge(context, "", (message) {
+                                Navigator.pop(context);
+                                ApiProvider.apiProvider
+                                    .saveUserEmail(message)
+                                    .then((value) {
+                                  if (value ?? false) {
+                                    BillingService.instance.fetchProducts(
+                                        context, [
+                                      "io.GoodIdeas.Pixel_Parade.stickerpacks_${widget.selectedSticker?.id ?? ""}"
+                                    ]);
+                                  }
+                                });
                               });
-                            });
+                            }
+                          } else {
+                            BillingService.instance.fetchProducts(context, [
+                              "io.GoodIdeas.Pixel_Parade.stickerpacks_${widget.selectedSticker?.id ?? ""}"
+                            ]);
                           }
-                        } else {
-                          BillingService.instance.fetchProducts(context, [
-                            "io.GoodIdeas.Pixel_Parade.stickerpacks_${widget.selectedSticker?.id ?? ""}"
-                          ]);
-                        }
-                        // ProductDetails product = ProductDetails(
-                        //     id: "163",
-                        //     title: "New Years Eve",
-                        //     description: "#holidays #NewYear #FREE",
-                        //     price: "0",
-                        //     rawPrice: 0.0,
-                        //     currencyCode: "IN");
 
-                        // // BillingService.instance.makePurchase(product);
-                      },
-                      child: NeoText(
-                          text: "\$${widget.selectedSticker?.price} | Buy Now",
-                          size: 14,
-                          color: HexColor("#ffffff"),
-                          fontWeight: FontWeight.w400),
+                          // ProductDetails product = ProductDetails(
+                          //     id: "163",
+                          //     title: "New Years Eve",
+                          //     description: "#holidays #NewYear #FREE",
+                          //     price: "0",
+                          //     rawPrice: 0.0,
+                          //     currencyCode: "IN");
+
+                          // // BillingService.instance.makePurchase(product);
+                        },
+                        child: NeoText(
+                            text:
+                                "\$${widget.selectedSticker?.price} | Buy Now",
+                            size: 14,
+                            color: HexColor("#ffffff"),
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ),
-                ),
                 const SizedBox(
                   height: 10,
                 )

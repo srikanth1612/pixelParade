@@ -33,11 +33,23 @@ class _MyCollection extends State<MyCollection> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const NeoText(
-                    text: "My Collections",
-                    size: 16,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
+                  Row(
+                    children: [
+                      if (context.read<HomeBloc>().isTextSearch)
+                        InkWell(
+                          onTap: () => Navigator.pop(context),
+                          child: const Icon(
+                            Icons.arrow_back_ios,
+                            size: 25,
+                          ),
+                        ),
+                      const NeoText(
+                        text: "My Collections",
+                        size: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ],
                   ),
                   InkWell(
                     onTap: () => Navigator.pushNamed(context, 'searchSticker',
@@ -75,41 +87,75 @@ class _MyCollection extends State<MyCollection> {
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: BlocBuilder<HomeBloc, HomeState>(
                   builder: (context, state) {
-                    return (state is HomeLoaded)
-                        ? GridView.builder(
-                            // physics:
-                            //     const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            primary: true,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 20,
-                                    childAspectRatio: 1 / 1.2,
-                                    mainAxisSpacing: 10),
-                            itemCount: state.totalStickers.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () => Navigator.pushNamed(
-                                    context, 'stickersPreview',
-                                    arguments: state.totalStickers[index]),
-                                child: BoxDecorationWithText(
-                                  price: state.totalStickers[index].price != 0
-                                      ? "${state.totalStickers[index].price}"
-                                      : 'Free',
-                                  hexColor:
-                                      state.totalStickers[index].price != 0
-                                          ? HexColor("#87FFD4")
-                                          : HexColor("#C1B444"),
-                                  title: state.totalStickers[index].name,
-                                  noOfStrickers: state
-                                      .totalStickers[index].stickers.length,
-                                  image:
-                                      "${ApiConstants.baseUrlForImages}/${state.totalStickers[index].stickers[0].filename}",
-                                ),
-                              );
-                            })
-                        : Container();
+                    if ((state is HomeLoaded)) {
+                      return GridView.builder(
+                          // physics:
+                          //     const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          primary: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 20,
+                                  childAspectRatio: 1 / 1.2,
+                                  mainAxisSpacing: 10),
+                          itemCount: state.totalStickers.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkWell(
+                              onTap: () => Navigator.pushNamed(
+                                  context, 'stickersPreview',
+                                  arguments: state.totalStickers[index]),
+                              child: BoxDecorationWithText(
+                                price: state.totalStickers[index].price != 0
+                                    ? "${state.totalStickers[index].price}"
+                                    : 'Free',
+                                hexColor: state.totalStickers[index].price != 0
+                                    ? HexColor("#87FFD4")
+                                    : HexColor("#C1B444"),
+                                title: state.totalStickers[index].name,
+                                noOfStrickers:
+                                    state.totalStickers[index].stickers.length,
+                                image:
+                                    "${ApiConstants.baseUrlForImages}/${state.totalStickers[index].stickers[0].filename}",
+                              ),
+                            );
+                          });
+                    } else if (state is HomeKeyWordsSearchLoaded) {
+                      return GridView.builder(
+                          // physics:
+                          //     const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          primary: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 20,
+                                  childAspectRatio: 1 / 1.2,
+                                  mainAxisSpacing: 10),
+                          itemCount: state.totalStickers.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkWell(
+                              onTap: () => Navigator.pushNamed(
+                                  context, 'stickersPreview',
+                                  arguments: state.totalStickers[index]),
+                              child: BoxDecorationWithText(
+                                price: state.totalStickers[index].price != 0
+                                    ? "${state.totalStickers[index].price}"
+                                    : 'Free',
+                                hexColor: state.totalStickers[index].price != 0
+                                    ? HexColor("#87FFD4")
+                                    : HexColor("#C1B444"),
+                                title: state.totalStickers[index].name,
+                                noOfStrickers:
+                                    state.totalStickers[index].stickers.length,
+                                image:
+                                    "${ApiConstants.baseUrlForImages}/${state.totalStickers[index].stickers[0].filename}",
+                              ),
+                            );
+                          });
+                    } else {
+                      return Container();
+                    }
                   },
                 ),
               ),

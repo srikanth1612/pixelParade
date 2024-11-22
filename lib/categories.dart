@@ -91,9 +91,15 @@ class _MyCategoriesState extends State<MyCategories> {
                                 itemCount: 6,
                                 itemBuilder: (BuildContext context, int index) {
                                   return InkWell(
-                                    // onTap: () => Navigator.pushNamed(
-                                    //     context, 'subCategories',
-                                    //     arguments: 'Free'),
+                                    onTap: () {
+                                      context.read<HomeBloc>().add(
+                                          HomeKeywordSearchEvent(
+                                              state.keywords[index]));
+
+                                      Navigator.pushNamed(
+                                          context, 'collections',
+                                          arguments: 'test');
+                                    },
                                     child: BoxDecorationWithCenterText(
                                       title: state.keywords[index],
                                       rightPadding: 4,
@@ -147,9 +153,20 @@ class _MyCategoriesState extends State<MyCategories> {
                                         mainAxisSpacing: 20),
                                 itemCount: state.keywords.length - 6,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return BoxDecorationWithNotification(
-                                    title: state.keywords[index + 6],
-                                    notification: false,
+                                  return InkWell(
+                                    onTap: () {
+                                      context.read<HomeBloc>().add(
+                                          HomeKeywordSearchEvent(
+                                              state.keywords[index + 6]));
+
+                                      Navigator.pushNamed(
+                                          context, 'collections',
+                                          arguments: 'test');
+                                    },
+                                    child: BoxDecorationWithNotification(
+                                      title: state.keywords[index + 6],
+                                      notification: false,
+                                    ),
                                   );
                                 },
                                 // children: const [

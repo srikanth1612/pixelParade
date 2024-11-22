@@ -1,12 +1,17 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
+
+part 'stickers_model.g.dart';
+
 List<TotalStickers> totalStickersFromJson(dynamic str) =>
     List<TotalStickers>.from((str).map((x) => TotalStickers.fromJson(x)));
 
 String totalStickersToJson(List<TotalStickers> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class TotalStickers {
+class TotalStickers extends Equatable {
   int id;
   String name;
   String description;
@@ -45,12 +50,26 @@ class TotalStickers {
         "quantity": quantity,
         "position": position,
       };
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        id,
+        description,
+        name,
+        price,
+      ];
 }
 
+@HiveType(typeId: 1)
 class Sticker {
+  @HiveField(0)
   int id;
+  @HiveField(1)
   int stickerpackId;
+  @HiveField(2)
   String filename;
+  @HiveField(3)
   int position;
 
   Sticker({

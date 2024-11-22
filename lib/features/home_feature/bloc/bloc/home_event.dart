@@ -5,6 +5,13 @@ class HomeEvent {}
 
 class HomeInitialFetchEvent extends HomeEvent {}
 
+class HomeKeywordSearchEvent extends HomeEvent {
+  final String text;
+  HomeKeywordSearchEvent(this.text);
+}
+
+class HomeReload extends HomeEvent {}
+
 @immutable
 class BannerEvent {}
 

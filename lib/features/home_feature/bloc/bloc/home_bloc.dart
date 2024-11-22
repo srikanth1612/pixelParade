@@ -14,17 +14,45 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
     on<HomeInitialFetchEvent>(homeInitialFetchEvent);
+    on<HomeKeywordSearchEvent>(totalStickersFromSearch);
+    on<HomeReload>(reloadOriginalStickers);
   }
+
+  List<TotalStickers> totalStickersEmbedded = [];
+
+  bool isTextSearch = false;
 
   FutureOr<void> homeInitialFetchEvent(
       HomeInitialFetchEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoading());
     List<TotalStickers>? posts = await ApiProvider.apiProvider.getStickers();
     if (posts != null) {
+      totalStickersEmbedded = posts;
+      isTextSearch = false;
       emit(HomeLoaded(totalStickers: posts));
     } else {
       emit(const HomeError("message"));
     }
+  }
+
+  FutureOr<void> reloadOriginalStickers(
+      HomeReload event, Emitter<HomeState> emit) async {
+    isTextSearch = false;
+    emit(HomeLoaded(totalStickers: totalStickersEmbedded));
+  }
+
+  FutureOr<void> totalStickersFromSearch(
+      HomeKeywordSearchEvent event, Emitter<HomeState> emit) async {
+    List<TotalStickers>? posts = totalStickersEmbedded
+        .where((sticker) => sticker.description
+            .toLowerCase()
+            .contains(event.text.toLowerCase()))
+        .toList();
+    if (posts.isNotEmpty) {
+      isTextSearch = true;
+      emit(HomeLoading());
+      emit(HomeKeyWordsSearchLoaded(totalStickers: posts));
+    } else {}
   }
 }
 

@@ -52,6 +52,7 @@
                             </collectionView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pm-Tc-bgU">
                                 <rect key="frame" x="0.0" y="108" width="393" height="710"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="MXy-Wc-jS4" kind="embed" id="i6R-g0-U9k"/>
                                 </connections>
@@ -95,7 +96,7 @@ the main app</string>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9bY-uY-S76"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2pm-Tc-bgU" secondAttribute="trailing" id="2HZ-dD-lIh"/>
                             <constraint firstAttribute="trailing" secondItem="U9d-AU-dFg" secondAttribute="trailing" id="5Qh-fh-yCn"/>

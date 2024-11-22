@@ -19,6 +19,13 @@ class HomeLoaded extends HomeState {
   const HomeLoaded({required this.totalStickers});
 }
 
+class HomeKeyWordsSearchLoaded extends HomeState {
+  final List<TotalStickers> totalStickers;
+  const HomeKeyWordsSearchLoaded({required this.totalStickers});
+}
+
+class HomeReloadOriginal extends HomeState {}
+
 class HomeError extends HomeState {
   final String? message;
   const HomeError(this.message);

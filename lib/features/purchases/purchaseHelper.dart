@@ -11,18 +11,20 @@ import 'package:pixel_parade/models/purchased_stickers.dart';
 import 'package:pixel_parade/network/api_provider.dart';
 import 'package:pixel_parade/presentation/widgets/alertbox_with_textfield.dart';
 
+import '../../models/stickers_model.dart';
+
 class BillingService {
   BillingService._();
   static BillingService get instance => _instance;
   static final BillingService _instance = BillingService._();
 
-  final InAppPurchase _iap = InAppPurchase.instance;
+  final InAppPurchase iap = InAppPurchase.instance;
 
   Future<void> initialize() async {
-    if (!(await _iap.isAvailable())) return;
+    if (!(await iap.isAvailable())) return;
     if (Platform.isIOS) {
       final iosPlatformAddition =
-          _iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+          iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
     }
   }
@@ -30,14 +32,14 @@ class BillingService {
   Future<void> dispose() async {
     if (Platform.isIOS) {
       final iosPlatformAddition =
-          _iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+          iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       await iosPlatformAddition.setDelegate(null);
     }
   }
 
   Future fetchProducts(BuildContext context, List<String> productIds) async {
     Set<String> ids = Set.from(productIds);
-    ProductDetailsResponse response = await _iap.queryProductDetails(ids);
+    ProductDetailsResponse response = await iap.queryProductDetails(ids);
 
     if (response.notFoundIDs.isNotEmpty) {
       showAlertMessage(
@@ -71,7 +73,7 @@ class BillingService {
   Future<bool> makePurchase(ProductDetails product) async {
     final purchaseParam = PurchaseParam(productDetails: product);
     final purchaseDetails =
-        await _iap.buyNonConsumable(purchaseParam: purchaseParam);
+        await iap.buyNonConsumable(purchaseParam: purchaseParam);
 
     return purchaseDetails;
   }
@@ -109,7 +111,7 @@ class BillingService {
           break;
       }
       if (purchaseDetails.pendingCompletePurchase) {
-        await _iap.completePurchase(purchaseDetails);
+        await iap.completePurchase(purchaseDetails);
       }
     }
   }
@@ -121,7 +123,7 @@ class BillingService {
 
     List<String> numbers = matches.map((match) => match.group(0)!).toList();
 
-    List<PurchasedStickers>? stickers =
+    List<Sticker>? stickers =
         await ApiProvider.apiProvider.getPurchasedStickers(numbers.first);
   }
 
@@ -158,7 +160,7 @@ class BillingService {
 
   restorePurchases() async {
     try {
-      await _iap.restorePurchases();
+      await iap.restorePurchases();
     } catch (error) {
       // restore purchase fails
     }
