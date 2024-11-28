@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:hive/hive.dart';
 import 'package:pixel_parade/categories.dart';
 import 'package:pixel_parade/colletions.dart';
@@ -55,11 +56,12 @@ class _DashboardWidget extends State<DashboardWidget> {
             key: bottomNavigationKey,
             type: BottomNavigationBarType.fixed,
             currentIndex: _currentIndex,
-            backgroundColor: colorScheme.surface,
+            backgroundColor: HexColor("#b0fafc"),
             selectedItemColor: Colors.blue[300],
             unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
             selectedLabelStyle: textTheme.bodySmall,
             unselectedLabelStyle: textTheme.bodySmall,
+            elevation: 12,
             onTap: (value) {
               if (value == 1) {
                 context.read<HomeBloc>().add(HomeReload());

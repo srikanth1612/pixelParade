@@ -29,20 +29,29 @@ class _MyCategoriesState extends State<MyCategories> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const NeoText(
-                  text: "My Categories",
-                  size: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
+                SizedBox(
+                    height: 30,
+                    width: 30,
+                    child: Image.asset("assets/images/main_logo.png")),
+                SizedBox(
+                  width: 5,
                 ),
+                const NeoText(
+                  text: "Pixel Parade",
+                  size: 21,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                Spacer(),
                 InkWell(
                   onTap: () => Navigator.pushNamed(context, 'searchSticker',
                       arguments: 'test'),
                   child: const Icon(
                     Icons.search_sharp,
                     size: 30,
+                    color: Colors.white,
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -63,25 +72,19 @@ class _MyCategoriesState extends State<MyCategories> {
                 const SizedBox(
                   height: 5,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: NeoText(
-                      text: "These are most popular category",
-                      size: 13,
-                      color: HexColor("#6E6E6E"),
-                      fontWeight: FontWeight.w500),
-                ),
                 BlocBuilder<KeywordsBloc, KeywordsState>(
                   builder: (context, state) {
                     return (state is KeywordsLoaded)
                         ? Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 20, top: 35),
                             child: SizedBox(
-                              height: MediaQuery.of(context).size.height * .34,
+                              height: 280,
                               child: GridView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 primary: true,
+                                padding: EdgeInsets.all(0),
                                 gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 3,
@@ -103,8 +106,8 @@ class _MyCategoriesState extends State<MyCategories> {
                                     child: BoxDecorationWithCenterText(
                                       title: state.keywords[index],
                                       rightPadding: 4,
-                                      borderColor: HexColor("#FF9494"),
-                                      color: HexColor("#FFEAEA"),
+                                      borderColor: HexColor("#ffffff"),
+                                      color: HexColor("#8af7fb"),
                                     ),
                                   );
                                 },
@@ -114,7 +117,6 @@ class _MyCategoriesState extends State<MyCategories> {
                         : Container();
                   },
                 ),
-                const SizedBox(height: 20),
                 const Padding(
                   padding: EdgeInsets.only(left: 20, right: 20),
                   child: NeoText(
@@ -127,30 +129,17 @@ class _MyCategoriesState extends State<MyCategories> {
                   height: 5,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: NeoText(
-                      text: "View all updated categories",
-                      size: 13,
-                      color: HexColor("#6E6E6E"),
-                      fontWeight: FontWeight.w500),
-                ),
-                Padding(
                   padding:
                       const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                   child: SizedBox(
                     child: BlocBuilder<KeywordsBloc, KeywordsState>(
                       builder: (context, state) {
                         return (state is KeywordsLoaded)
-                            ? GridView.builder(
+                            ? ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 primary: true,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 3,
-                                        crossAxisSpacing: 20,
-                                        childAspectRatio: 1 / 1,
-                                        mainAxisSpacing: 20),
+                                padding: EdgeInsets.all(0),
                                 itemCount: state.keywords.length - 6,
                                 itemBuilder: (BuildContext context, int index) {
                                   return InkWell(
@@ -163,38 +152,18 @@ class _MyCategoriesState extends State<MyCategories> {
                                           context, 'collections',
                                           arguments: 'test');
                                     },
-                                    child: BoxDecorationWithNotification(
-                                      title: state.keywords[index + 6],
-                                      notification: false,
+                                    child: Center(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 25.0),
+                                        child: BoxDecorationWithNotification(
+                                          title: state.keywords[index + 6],
+                                          notification: false,
+                                        ),
+                                      ),
                                     ),
                                   );
                                 },
-                                // children: const [
-                                //   BoxDecorationWithNotification(
-                                //     title: "Cheerleading",
-                                //     notification: false,
-                                //   ),
-                                //   BoxDecorationWithNotification(
-                                //     title: "Colorinng Books",
-                                //     notification: false,
-                                //   ),
-                                //   BoxDecorationWithNotification(
-                                //     title: "Digital Stickers",
-                                //     notification: false,
-                                //   ),
-                                //   BoxDecorationWithNotification(
-                                //       title: "Exclusive ArtWork", notification: false),
-                                //   BoxDecorationWithNotification(
-                                //       title: "Fonts", notification: false),
-                                //   BoxDecorationWithNotification(
-                                //       title: "Football", notification: false),
-                                //   BoxDecorationWithNotification(
-                                //       title: "Soccer", notification: false),
-                                //   BoxDecorationWithNotification(
-                                //       title: "Graduation", notification: false),
-                                //   BoxDecorationWithNotification(
-                                //       title: "Holidays", notification: false)
-                                // ],
                               )
                             : Container();
                       },

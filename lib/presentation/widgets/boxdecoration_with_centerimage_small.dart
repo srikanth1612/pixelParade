@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pixel_parade/network/api_provider.dart';
 import 'package:pixel_parade/utils/saveFilesLocally.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BoxDecorationWithCenterImageSmall extends StatelessWidget {
   final String image;
@@ -31,17 +36,48 @@ class BoxDecorationWithCenterImageSmall extends StatelessWidget {
                   child: Container(
                     margin: EdgeInsets.all(10),
                     child: image.contains("http")
-                        ? CachedNetworkImage(
-                            cacheManager: CustomCacheManager(),
-                            imageUrl: image,
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) => SizedBox(
-                              width: 10,
-                              height: 10,
-                              child: CircularProgressIndicator(
-                                  value: downloadProgress.progress),
+                        ? InkWell(
+                            onTap: () async {
+                              final response =
+                                  await ApiProvider().getStickerDetails(image);
+
+                              // final uri =
+                              //     Uri.file(response?.absolute.path ?? "");
+                              // print(uri);
+                              // // Launch the messaging app with the image URI
+                              // final smsUrl =
+                              //     'sms:?attachment=${uri.toString()}';
+                              // if (!File(uri.toFilePath()).existsSync()) {
+                              //   throw Exception('$uri does not exist!');
+                              // } else {
+                              //   print("mothing");
+                              // }
+                              // if (await canLaunchUrl(Uri.parse(smsUrl))) {
+                              //   await launchUrl(Uri.parse(smsUrl));
+                              // } else {
+                              //   throw 'Could not launch $smsUrl';
+                              // }
+
+                              final result = await Share.shareXFiles(
+                                [XFile(response?.path ?? "")],
+                              );
+
+                              if (result.status == ShareResultStatus.success) {
+                                print('Thank you for sharing the picture!');
+                              }
+                            },
+                            child: CachedNetworkImage(
+                              cacheManager: CustomCacheManager(),
+                              imageUrl: image,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => SizedBox(
+                                width: 10,
+                                height: 10,
+                                child: CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                              ),
+                              errorWidget: (context, url, error) => Container(),
                             ),
-                            errorWidget: (context, url, error) => Container(),
                           )
                         : Image.asset(image),
                   )),

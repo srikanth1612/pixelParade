@@ -55,6 +55,15 @@ dependencies:
   hive_flutter: ^1.1.0
   hive_generator: ^2.0.1
   build_runner: ^2.4.13
+  flutter_box_transform: ^0.4.6
+  image_picker: ^1.0.4
+  share_plus: ^10.1.2
+  path_provider: ^2.1.5
+  http: ^1.2.2
+  url_launcher: ^6.3.1
+  screenshot: ^3.0.0
+  matrix_gesture_detector: ^0.2.0-nullsafety.1
+  # permission_handler: ^11.0.1
 
 
 

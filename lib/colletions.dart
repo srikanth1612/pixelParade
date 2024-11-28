@@ -33,32 +33,38 @@ class _MyCollection extends State<MyCollection> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      if (context.read<HomeBloc>().isTextSearch)
-                        InkWell(
-                          onTap: () => Navigator.pop(context),
-                          child: const Icon(
-                            Icons.arrow_back_ios,
-                            size: 25,
-                          ),
-                        ),
-                      const NeoText(
-                        text: "My Collections",
-                        size: 16,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
+                  if (context.read<HomeBloc>().isTextSearch)
+                    InkWell(
+                      onTap: () => Navigator.pop(context),
+                      child: const Icon(
+                        Icons.arrow_back_ios,
+                        size: 25,
+                        color: Colors.white,
                       ),
-                    ],
+                    ),
+                  SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: Image.asset("assets/images/main_logo.png")),
+                  SizedBox(
+                    width: 5,
                   ),
+                  const NeoText(
+                    text: "Pixel Parade",
+                    size: 21,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  Spacer(),
                   InkWell(
                     onTap: () => Navigator.pushNamed(context, 'searchSticker',
                         arguments: 'test'),
                     child: const Icon(
                       Icons.search_sharp,
                       size: 30,
+                      color: Colors.white,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -66,21 +72,10 @@ class _MyCollection extends State<MyCollection> {
             const Padding(
               padding: EdgeInsets.only(left: 20, right: 20),
               child: NeoText(
-                  text: "All Collections",
-                  size: 16,
+                  text: "All Sticker Collections",
+                  size: 17,
                   color: Colors.black,
-                  fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20, left: 20),
-              child: NeoText(
-                  text: "View all listed collections",
-                  size: 13,
-                  color: HexColor("#6E6E6E"),
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.bold),
             ),
             Expanded(
               child: Padding(
@@ -93,12 +88,13 @@ class _MyCollection extends State<MyCollection> {
                           //     const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           primary: true,
+                          padding: EdgeInsets.only(top: 30),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 20,
                                   childAspectRatio: 1 / 1.2,
-                                  mainAxisSpacing: 10),
+                                  mainAxisSpacing: 0),
                           itemCount: state.totalStickers.length,
                           itemBuilder: (BuildContext context, int index) {
                             return InkWell(
@@ -109,12 +105,9 @@ class _MyCollection extends State<MyCollection> {
                                 price: state.totalStickers[index].price != 0
                                     ? "${state.totalStickers[index].price}"
                                     : 'Free',
-                                hexColor: state.totalStickers[index].price != 0
-                                    ? HexColor("#87FFD4")
-                                    : HexColor("#C1B444"),
                                 title: state.totalStickers[index].name,
                                 noOfStrickers:
-                                    state.totalStickers[index].stickers.length,
+                                    state.totalStickers[index].quantity,
                                 image:
                                     "${ApiConstants.baseUrlForImages}/${state.totalStickers[index].stickers[0].filename}",
                               ),
@@ -142,9 +135,6 @@ class _MyCollection extends State<MyCollection> {
                                 price: state.totalStickers[index].price != 0
                                     ? "${state.totalStickers[index].price}"
                                     : 'Free',
-                                hexColor: state.totalStickers[index].price != 0
-                                    ? HexColor("#87FFD4")
-                                    : HexColor("#C1B444"),
                                 title: state.totalStickers[index].name,
                                 noOfStrickers:
                                     state.totalStickers[index].stickers.length,

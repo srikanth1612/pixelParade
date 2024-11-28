@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:hive/hive.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:pixel_parade/features/purchases/purchaseHelper.dart';
 import 'package:pixel_parade/models/stickers_model.dart';
@@ -121,23 +120,28 @@ class _StickerPreviewState extends State<StickerPreview> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: () => Navigator.of(context).pop(),
-                            child: const Icon(
-                              Icons.arrow_back_ios,
-                              size: 20,
-                            ),
-                          ),
-                          NeoText(
-                            text: widget.selectedSticker?.name ?? "",
-                            size: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ],
+                      InkWell(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: const Icon(
+                          Icons.arrow_back_ios,
+                          size: 20,
+                          color: Colors.white,
+                        ),
                       ),
+                      SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset("assets/images/main_logo.png")),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      const NeoText(
+                        text: "Pixel Parade",
+                        size: 21,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      Spacer(),
                       InkWell(
                         onTap: () => Navigator.pushNamed(
                             context, 'searchSticker',
@@ -145,8 +149,9 @@ class _StickerPreviewState extends State<StickerPreview> {
                         child: const Icon(
                           Icons.search_sharp,
                           size: 30,
+                          color: Colors.white,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -155,7 +160,7 @@ class _StickerPreviewState extends State<StickerPreview> {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: NeoText(
                       text:
-                          "Stickers (${widget.selectedSticker?.stickers.length})",
+                          "${widget.selectedSticker?.name} (${widget.selectedSticker?.quantity})",
                       size: 16,
                       color: Colors.black,
                       fontWeight: FontWeight.w600),

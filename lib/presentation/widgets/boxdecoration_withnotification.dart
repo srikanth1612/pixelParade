@@ -16,20 +16,23 @@ class BoxDecorationWithNotification extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Container(
-          width: 100,
-          height: 100,
+          width: MediaQuery.of(context).size.width * .75,
+          height: 65,
           decoration: BoxDecoration(
-            border: Border.all(color: HexColor("#81F0F3"), width: 1),
-            borderRadius: BorderRadius.circular(20),
-            shape: BoxShape.rectangle,
+              border: Border.all(color: HexColor("#81F0F3"), width: 1),
+              borderRadius: BorderRadius.circular(20),
+              shape: BoxShape.rectangle,
+              color: HexColor("8af7fb")),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 6.0, right: 6.0),
+            child: Center(
+                child: NeoText(
+                    text: title,
+                    size: 14,
+                    color: Colors.black,
+                    textAlign: TextAlign.center,
+                    fontWeight: FontWeight.w500)),
           ),
-          child: Center(
-              child: NeoText(
-                  text: title,
-                  size: 14,
-                  color: Colors.black,
-                  textAlign: TextAlign.center,
-                  fontWeight: FontWeight.w500)),
         ),
         if (notification)
           Positioned(

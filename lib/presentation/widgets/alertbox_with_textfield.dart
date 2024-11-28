@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:quickalert/quickalert.dart';
 
 showAlertWithDialouge(BuildContext context, String message,
@@ -10,7 +11,9 @@ showAlertWithDialouge(BuildContext context, String message,
         "Give us your email and we will notify about new exclusive original stickers",
     barrierDismissible: true,
     confirmBtnText: 'Save',
-    customAsset: null,
+    showCancelBtn: true,
+    customAsset: "assets/images/email_icon.gif",
+    headerBackgroundColor: HexColor("b0fafc"),
     widget: TextFormField(
       decoration: const InputDecoration(
         alignLabelWithHint: true,
@@ -23,12 +26,15 @@ showAlertWithDialouge(BuildContext context, String message,
       keyboardType: TextInputType.emailAddress,
       onChanged: (value) => message = value,
     ),
+    onCancelBtnTap: () {
+      onSubmit(message);
+    },
     onConfirmBtnTap: () async {
       if (message.length < 5) {
         await QuickAlert.show(
           context: context,
           type: QuickAlertType.error,
-          text: 'Please input something',
+          text: 'Invalid Email',
         );
         return;
       } else if (validateEmail(message) == null) {

@@ -3,6 +3,8 @@ PODS:
   - DownloadButton (0.1.0)
   - FLAnimatedImage (1.0.17)
   - Flutter (1.0.0)
+  - image_picker_ios (0.0.1):
+    - Flutter
   - in_app_purchase_storekit (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -20,6 +22,8 @@ PODS:
   - SDWebImage/GIF (4.4.8):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - share_plus (0.0.1):
+    - Flutter
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -28,20 +32,25 @@ PODS:
     - Flutter
     - FlutterMacOS
   - Sync (6.5.0)
+  - url_launcher_ios (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - DownloadButton
   - Flutter (from `Flutter`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - in_app_purchase_storekit (from `.symlinks/plugins/in_app_purchase_storekit/darwin`)
   - Moya
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - R.swift
   - SDWebImage
   - SDWebImage/GIF
+  - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - SnapKit
   - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
   - Sync
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
   trunk:
@@ -57,30 +66,39 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   in_app_purchase_storekit:
     :path: ".symlinks/plugins/in_app_purchase_storekit/darwin"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  share_plus:
+    :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sqflite_darwin:
     :path: ".symlinks/plugins/sqflite_darwin/darwin"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
   Alamofire: 840d2a1ad82355b536ec6ba5f97e5bfa54600ca3
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
   in_app_purchase_storekit: 8c3b0b3eb1b0f04efbff401c3de6266d4258d433
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   R.swift: 33e7082885d0c0bac7ae20ef7d2845a6a920ca11
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
+  share_plus: 8b6f8b3447e494cca5317c8c3073de39b3600d1f
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d
   Sync: 86bb8aa0ea2f955ea5ac97b7b73129f86591c39e
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
-PODFILE CHECKSUM: bff0f9f670685ae27cf1edf0e2abe968e81d49ac
+PODFILE CHECKSUM: 92f49e46713e9bb11c3b1d6c119d6ae83211075b
 
 COCOAPODS: 1.14.3

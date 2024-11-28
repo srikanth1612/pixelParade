@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pixel_parade/models/banner_model.dart';
 import 'package:pixel_parade/models/purchased_stickers.dart';
 import 'package:pixel_parade/models/stickers_model.dart';
@@ -10,6 +12,7 @@ import 'package:pixel_parade/network/api_constants.dart';
 import 'package:pixel_parade/network/logging_intercepator.dart';
 import 'package:pixel_parade/network/session_manager/session_manager.dart';
 import 'package:pixel_parade/utils/shareDataToiOS.dart';
+import 'package:http/http.dart' as http;
 
 class ApiProvider {
   static final ApiProvider apiProvider = ApiProvider._internal();
@@ -55,6 +58,15 @@ class ApiProvider {
       debugPrint(error.toString());
       return false;
     }
+  }
+
+  Future<File>? getStickerDetails(String link) async {
+    final response = await http.get(Uri.parse(link));
+    final directory = await getTemporaryDirectory();
+    final path = directory.path;
+    final file = File('$path/image.gif');
+    file.writeAsBytes(response.bodyBytes);
+    return file;
   }
 
   Future<BannerModel?> getBanner() async {
@@ -118,7 +130,7 @@ class ApiProvider {
         options: headerOptions,
       );
       if (response.statusCode == 200) {
-        SessionManager.setUserEmail(email);
+        SessionManager.setUserEmail(email == "" ? "noemail" : email);
 
         return true;
       } else {

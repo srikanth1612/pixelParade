@@ -32,6 +32,19 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera usage needs to bring the ability for adding stickers on Your photo</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow app to use Your location</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Photo library usage needs to bring the ability for adding stickers on Your photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo library usage needs to bring the ability for adding stickers on Your photo</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>sms</string>
+		<string>mms</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

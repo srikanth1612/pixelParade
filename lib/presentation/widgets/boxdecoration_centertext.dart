@@ -27,13 +27,16 @@ class BoxDecorationWithCenterText extends StatelessWidget {
         ),
         width: 100,
         height: 70,
-        child: Center(
-          child: NeoText(
-              text: title,
-              size: 14,
-              color: Colors.black,
-              textAlign: TextAlign.center,
-              fontWeight: FontWeight.w500),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 4, right: 4),
+          child: Center(
+            child: NeoText(
+                text: title,
+                size: 14,
+                color: Colors.black,
+                textAlign: TextAlign.center,
+                fontWeight: FontWeight.w500),
+          ),
         ),
       ),
     );

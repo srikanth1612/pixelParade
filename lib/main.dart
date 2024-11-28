@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pixel_parade/camera_with_stickers.dart';
 import 'package:pixel_parade/categories.dart';
 import 'package:pixel_parade/colletions.dart';
 import 'package:pixel_parade/features/home_feature/UI/home.dart';
@@ -69,13 +70,20 @@ class MyApp extends StatelessWidget {
                   );
                 },
               );
+            } else if (settings.name == "cameraStickers") {
+              final String args = settings.arguments as String;
+              return MaterialPageRoute(
+                builder: (context) {
+                  return CameraWithStickers(imagePath: args);
+                },
+              );
             }
             return null;
           },
           title: 'Pixel Parade',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primaryColor: HexColor("#08D9E0"),
+            primaryColor: Colors.white,
             //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),

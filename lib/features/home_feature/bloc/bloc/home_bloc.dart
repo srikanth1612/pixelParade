@@ -48,11 +48,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             .toLowerCase()
             .contains(event.text.toLowerCase()))
         .toList();
-    if (posts.isNotEmpty) {
-      isTextSearch = true;
-      emit(HomeLoading());
-      emit(HomeKeyWordsSearchLoaded(totalStickers: posts));
-    } else {}
+    // if (posts.isNotEmpty) {
+    isTextSearch = true;
+    emit(HomeLoading());
+    emit(HomeKeyWordsSearchLoaded(totalStickers: posts));
+    // } else {}
   }
 }
 

@@ -6,7 +6,7 @@ import 'package:pixel_parade/utils/saveFilesLocally.dart';
 
 class BoxDecorationWithText extends StatelessWidget {
   final String price;
-  final HexColor hexColor;
+
   final String title;
   final int noOfStrickers;
   final String image;
@@ -15,7 +15,6 @@ class BoxDecorationWithText extends StatelessWidget {
   const BoxDecorationWithText(
       {super.key,
       required this.price,
-      required this.hexColor,
       required this.title,
       required this.noOfStrickers,
       required this.image,
@@ -57,15 +56,23 @@ class BoxDecorationWithText extends StatelessWidget {
                 padding:
                     const EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
                 decoration: BoxDecoration(
-                  color: hexColor,
-                  border: Border.all(color: hexColor, width: 1),
+                  color: price.toLowerCase() == "free"
+                      ? HexColor("#2794ff")
+                      : HexColor("#ffffff"),
+                  border: Border.all(
+                      color: price.toLowerCase() == "free"
+                          ? HexColor("#ffffff")
+                          : HexColor("#2794ff"),
+                      width: 1),
                   borderRadius: BorderRadius.circular(20),
                   shape: BoxShape.rectangle,
                 ),
                 child: NeoText(
-                    text: price,
+                    text: price.toLowerCase() == "free" ? price : "\$$price",
                     size: 12,
-                    color: Colors.black,
+                    color: price.toLowerCase() == "free"
+                        ? HexColor("#ffffff")
+                        : HexColor("#2794ff"),
                     fontWeight: FontWeight.w600)),
           ),
         if (isPriceRequired)
@@ -73,10 +80,10 @@ class BoxDecorationWithText extends StatelessWidget {
             left: 0,
             top: 140,
             child: NeoText(
-                text: title,
-                size: 14,
+                text: getFirstWordsFast(title, " ", 3),
+                size: 13,
                 color: Colors.black,
-                fontWeight: FontWeight.w600),
+                fontWeight: FontWeight.w500),
           ),
         if (isPriceRequired)
           Positioned(
@@ -106,5 +113,27 @@ class BoxDecorationWithText extends StatelessWidget {
           )
       ],
     );
+  }
+
+  String getFirstWordsFast(
+      String sentence, String wordSeparator, int findCount) {
+    if (findCount < 1) {
+      return '';
+    }
+
+    Runes spaceRunes = Runes(wordSeparator);
+    Runes sentenceRunes = Runes(sentence);
+    String finalString = "";
+
+    for (int letter in sentenceRunes) {
+      if (letter == spaceRunes.single) {
+        findCount -= 1;
+        if (findCount < 1) {
+          return finalString;
+        }
+      }
+      finalString += String.fromCharCode(letter);
+    }
+    return finalString;
   }
 }
